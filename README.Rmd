@@ -18,13 +18,13 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of bloodlines is to ...
+The goal of bloodlines is to generate nice plots for hemodynamics data. 
 
 ## Installation
 
 You can install the development version of bloodlines from [GitHub](https://github.com/) with:
 
-``` r
+```{r}
 # install.packages("pak")
 pak::pak("jhuwit/bloodlines")
 ```
@@ -36,20 +36,35 @@ This is a basic example which shows you how to solve a common problem:
 ```{r example}
 library(bloodlines)
 ## basic example code
+data(sample_df)
+plot_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
+             facet_var = "cat_cpb",
+             layer_var = "map_cat")
+
+## we can use our own colors
+sample_df_clean = 
+  sample_df %>% 
+  dplyr::filter(cat_cpb != "intra") %>% 
+  dplyr::mutate(map_cat = forcats::fct_na_value_to_level(map_cat, level = "Missing"),
+                map_cat = forcats::fct_rev(map_cat),
+                cat_cpb = factor(cat_cpb,
+                                 levels = c("pre", "post"),
+                                 labels = c("Pre-CPB", "Post-CPB")),
+                time = time / 60)
+cols = c("[0,65)" = "#D82632FF",
+               "[65,Inf)" = "#264DFFFF",
+               "Missing" = "darkgrey")
+
+plot_lasagna(data = sample_df_clean,
+             facet_var = "cat_cpb",
+             layer_var = "map_cat",
+             xlab = "Time (hr)",
+             ylab = "Proportion of Pts",
+             title = "Lasagna Plot",
+             xlims = c(0, 4),
+             xbreaks = seq(0, 4, 1),
+             col_vector = cols)
+
+
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
