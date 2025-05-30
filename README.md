@@ -18,17 +18,8 @@ You can install the development version of bloodlines from
 pak::pak("jhuwit/bloodlines")
 #> ℹ Loading metadata database✔ Loading metadata database ... done
 #>  
-#> → Will update 1 package.
-#> → Will download 1 package with unknown size.
-#> + bloodlines 0.0.0.9000 → 0.0.0.9000 👷🏾🔧 ⬇ (GitHub: d9260f0)
-#> ℹ Getting 1 pkg with unknown size
-#> ✔ Got bloodlines 0.0.0.9000 (source) (1.59 MB)
-#> ℹ Packaging bloodlines 0.0.0.9000
-#> ✔ Packaged bloodlines 0.0.0.9000 (1.1s)
-#> ℹ Building bloodlines 0.0.0.9000
-#> ✔ Built bloodlines 0.0.0.9000 (4.1s)
-#> ✔ Installed bloodlines 0.0.0.9000 (github::jhuwit/bloodlines@d9260f0) (65ms)
-#> ✔ 1 pkg + 32 deps: kept 20, upd 1, dld 1 (NA B) [18.6s]
+#> ℹ No downloads are needed
+#> ✔ 1 pkg + 32 deps: kept 21 [9.5s]
 ```
 
 ## Lasagna plots
@@ -56,6 +47,8 @@ sample_df_clean =
                                  levels = c("pre", "post"),
                                  labels = c("Pre-CPB", "Post-CPB")),
                 time = time / 60)
+
+# paletteer::paletteer_d("colorBlindness::Blue2DarkRed12Steps")
 cols = c("[0,65)" = "#D82632FF",
                "[65,Inf)" = "#264DFFFF",
                "Missing" = "darkgrey")
@@ -79,6 +72,13 @@ plot_lasagna(data = sample_df_clean,
 
 ``` r
 
+
+sample_df_clean2 = 
+  sample_df_clean %>% 
+  dplyr::group_by(id) %>% 
+  dplyr::mutate(n = dplyr::n()) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::mutate(id = forcats::fct_reorder(id, n))
 plot_ts_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
              facet_var = "cat_cpb",
              layer_var = "map_cat")
@@ -89,7 +89,7 @@ plot_ts_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
 ``` r
 
 
-plot_ts_lasagna(data = sample_df_clean,
+plot_ts_lasagna(data = sample_df_clean2,
              facet_var = "cat_cpb",
              layer_var = "map_cat",
              xlab = "Time (hr)",

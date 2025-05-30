@@ -50,6 +50,8 @@ sample_df_clean =
                                  levels = c("pre", "post"),
                                  labels = c("Pre-CPB", "Post-CPB")),
                 time = time / 60)
+
+# paletteer::paletteer_d("colorBlindness::Blue2DarkRed12Steps")
 cols = c("[0,65)" = "#D82632FF",
                "[65,Inf)" = "#264DFFFF",
                "Missing" = "darkgrey")
@@ -71,12 +73,19 @@ plot_lasagna(data = sample_df_clean,
 
 ```{r example 2}
 
+
+sample_df_clean2 = 
+  sample_df_clean %>% 
+  dplyr::group_by(id) %>% 
+  dplyr::mutate(n = dplyr::n()) %>% 
+  dplyr::ungroup() %>% 
+  dplyr::mutate(id = forcats::fct_reorder(id, n))
 plot_ts_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
              facet_var = "cat_cpb",
              layer_var = "map_cat")
 
 
-plot_ts_lasagna(data = sample_df_clean,
+plot_ts_lasagna(data = sample_df_clean2,
              facet_var = "cat_cpb",
              layer_var = "map_cat",
              xlab = "Time (hr)",
