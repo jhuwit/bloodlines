@@ -29,9 +29,8 @@ You can install the development version of bloodlines from [GitHub](https://gith
 pak::pak("jhuwit/bloodlines")
 ```
 
-## Example
+## Lasagna plots
 
-This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(bloodlines)
@@ -68,3 +67,24 @@ plot_lasagna(data = sample_df_clean,
 
 ```
 
+## Lasagna plots (time series version)
+
+```{r example 2}
+
+plot_ts_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
+             facet_var = "cat_cpb",
+             layer_var = "map_cat")
+
+
+plot_ts_lasagna(data = sample_df_clean,
+             facet_var = "cat_cpb",
+             layer_var = "map_cat",
+             xlab = "Time (hr)",
+             ylab = "Patient",
+             title = "Time series lasagna Plot",
+             xlims = c(0, 4),
+             xbreaks = seq(0, 4, 1),
+             col_vector = cols)
+
+
+```
