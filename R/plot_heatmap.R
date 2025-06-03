@@ -34,7 +34,7 @@
 #' data(reg_df)
 #'
 #' # Run the function
-#' print(plot_heatmap(reg_df))
+#' plot_heatmap(reg_df)
 #'
 plot_heatmap = function(data,
                         facet_var = NULL,

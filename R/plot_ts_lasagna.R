@@ -22,7 +22,7 @@
 #' data(sample_df)
 #'
 #' # Run the function
-#' print(plot_ts_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map"))
+#' plot_ts_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map")
 #'
 
 plot_ts_lasagna =

@@ -18,17 +18,8 @@ You can install the development version of bloodlines from
 pak::pak("jhuwit/bloodlines")
 #> ℹ Loading metadata database✔ Loading metadata database ... done
 #>  
-#> → Will update 1 package.
-#> → Will download 1 package with unknown size.
-#> + bloodlines 0.0.0.9000 → 0.0.0.9000 👷‍♂️🔧 ⬇ (GitHub: 20d2577)
-#> ℹ Getting 1 pkg with unknown size
-#> ✔ Got bloodlines 0.0.0.9000 (source) (3.83 MB)
-#> ℹ Packaging bloodlines 0.0.0.9000
-#> ✔ Packaged bloodlines 0.0.0.9000 (1.2s)
-#> ℹ Building bloodlines 0.0.0.9000
-#> ✔ Built bloodlines 0.0.0.9000 (4.1s)
-#> ✔ Installed bloodlines 0.0.0.9000 (github::jhuwit/bloodlines@20d2577) (92ms)
-#> ✔ 1 pkg + 40 deps: kept 26, upd 1, dld 1 (NA B) [16.8s]
+#> ℹ No downloads are needed
+#> ✔ 1 pkg + 40 deps: kept 27 [9.3s]
 ```
 
 ## Lasagna plots
@@ -55,7 +46,22 @@ sample_df_clean =
                 cat_cpb = factor(cat_cpb,
                                  levels = c("pre", "post"),
                                  labels = c("Pre-CPB", "Post-CPB")),
-                time = time / 60)
+                time = time / 60) %>% 
+  print()
+#> # A tibble: 36,329 × 7
+#>    id      time timestamp           cat_cpb val_map val_cvp cat_map 
+#>    <chr>  <dbl> <dttm>              <fct>     <dbl>   <dbl> <fct>   
+#>  1 1     0      2019-01-01 00:18:20 Pre-CPB    97.6  18.4   [65,Inf)
+#>  2 1     0.0167 2019-01-01 00:19:20 Pre-CPB    73.6  13.6   [65,Inf)
+#>  3 1     0.0333 2019-01-01 00:20:20 Pre-CPB    NA    12.8   Missing 
+#>  4 1     0.05   2019-01-01 00:21:20 Pre-CPB    66.1  11.5   [65,Inf)
+#>  5 1     0.0667 2019-01-01 00:22:20 Pre-CPB    61.6   3.55  [0,65)  
+#>  6 1     0.0833 2019-01-01 00:23:20 Pre-CPB    99.7   4.31  [65,Inf)
+#>  7 1     0.1    2019-01-01 00:24:20 Pre-CPB    87.8   9.37  [65,Inf)
+#>  8 1     0.117  2019-01-01 00:25:20 Pre-CPB    91.0   0.968 [65,Inf)
+#>  9 1     0.133  2019-01-01 00:26:20 Pre-CPB    99.0   1.86  [65,Inf)
+#> 10 1     0.15   2019-01-01 00:27:20 Pre-CPB   113.   13.0   [65,Inf)
+#> # ℹ 36,319 more rows
 
 # paletteer::paletteer_d("colorBlindness::Blue2DarkRed12Steps")
 cols = c(
@@ -72,7 +78,8 @@ plot_lasagna(data = sample_df_clean,
              title = "Lasagna Plot",
              xlims = c(0, 4),
              xbreaks = seq(0, 4, 1),
-             col_vec = cols)
+             col_vec = cols) %>% 
+  print()
 #> Warning: Removed 5 rows containing missing values or values outside the scale range
 #> (`geom_bar()`).
 ```
@@ -90,7 +97,8 @@ sample_df_clean2 =
   dplyr::mutate(id = forcats::fct_reorder(id, n))
 plot_ts_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
              facet_var = "cat_cpb",
-             layer_var = "cat_map")
+             layer_var = "cat_map") %>% 
+  print()
 ```
 
 <img src="man/figures/README-time_series_lasagna-1.png" width="100%" />
@@ -106,7 +114,8 @@ plot_ts_lasagna(data = sample_df_clean2,
              title = "Time series lasagna Plot",
              xlims = c(0, 4),
              xbreaks = seq(0, 4, 1),
-             col_vec = cols)
+             col_vec = cols) %>% 
+  print()
 #> Warning: Removed 200 rows containing missing values or values outside the scale range
 #> (`geom_tile()`).
 ```
@@ -124,7 +133,8 @@ plot_heatmap(data = reg_df,
              title = "Regression Results",
              sig = TRUE,
              text_col = "black",
-             fill_scheme = "gradient2")
+             fill_scheme = "gradient2") %>% 
+  print()
 ```
 
 <img src="man/figures/README-heatmap-1.png" width="100%" />
@@ -141,7 +151,8 @@ plot_heatmap(data = reg_df,
              text_col = "black",
              fill_scheme = "palette",
              palette = "viridis::plasma",
-             show_only_sig = TRUE)
+             show_only_sig = TRUE) %>% 
+  print()
 ```
 
 <img src="man/figures/README-heatmap-2.png" width="100%" />
@@ -157,7 +168,8 @@ plot_heatmap(data = reg_df,
              sig = TRUE,
              text_col = "black",
              fill_scheme = "gradientn",
-             n_colors = 5)
+             n_colors = 5) %>% 
+  print()
 ```
 
 <img src="man/figures/README-heatmap-3.png" width="100%" />
@@ -168,13 +180,13 @@ plot_heatmap(data = reg_df,
 data(mult_reg_df)
 
 
-plot_j(mult_reg_df, col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"))
+p = plot_j(mult_reg_df, col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"))
+p + ggplot2::theme(axis.text.x =  ggplot2::element_text(angle = 90))
 ```
 
 <img src="man/figures/README-j_plot-1.png" width="100%" />
 
 ``` r
-
 
 ## example with facets 
 
@@ -184,11 +196,14 @@ facet_data =
   dplyr::bind_rows(mult_reg_df %>% dplyr::mutate(v1 = "Post-CPB")) %>% 
   dplyr::mutate(v1 = forcats::fct_rev(v1))
 
-plot_j(
+p = plot_j(
   facet_data,
   col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"),
-  facet_var = "v1"
+  facet_var = "v1",
+  x_label = "MAP Range",
+  y_label = "Odds Ratio"
 )
+p + ggplot2::theme(axis.text.x =  ggplot2::element_text(angle = 90))
 ```
 
 <img src="man/figures/README-j_plot-2.png" width="100%" />
