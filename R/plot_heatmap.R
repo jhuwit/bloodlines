@@ -2,6 +2,7 @@
 #'
 #'
 #' @importFrom dplyr rename if_else across mutate between
+#' @importFrom tidyr drop_na
 #' @importFrom ggplot2 ggplot aes geom_tile geom_text facet_wrap labs scale_fill_gradient scale_fill_gradientn scale_fill_gradient2
 #' @importFrom paletteer scale_fill_paletteer_c
 #' @importFrom colorspace diverge_hcl
@@ -111,7 +112,7 @@ plot_heatmap = function(data,
                             msg = "must provide vector of colors OR number of colors for gradient n scale")
     if(!is.null(color_vec)){
       p = p +
-        ggplot2::scale_fill_gradientn(colors = colorspace::diverge_hcl(n_colors),
+        ggplot2::scale_fill_gradientn(colorspace::diverge_hcl(n_colors),
                                       name = paste0(fill_lab))
     } else {
       p = p +
@@ -130,7 +131,8 @@ plot_heatmap = function(data,
     assertthat::assert_that("p" %in% colnames(data),
                             msg = "'p' must be column in data")
     p = p +
-      ggplot2::geom_text(ggplot2::aes(label = paste0("OR = ", sprintf("%.2g", signif(estimate, 2)), "\np = ", p)),
+      ggplot2::geom_text(data = data %>% tidyr::drop_na(),
+                         ggplot2::aes(label = paste0("OR = ", sprintf("%.2g", signif(estimate, 2)), "\np = ", p)),
                 col = text_col)
 
   }
@@ -138,7 +140,8 @@ plot_heatmap = function(data,
     assertthat::assert_that(all(c("ub", "lb") %in% colnames(data)),
                             msg = "'ub' and 'lb' must be columns in data")
     p = p +
-      ggplot2::geom_text(ggplot2::aes(label = paste0("OR = ", sprintf("%.2g", signif(estimate, 2)), "\n(", lb, ",", ub, ")")),
+      ggplot2::geom_text(data = data %>% tidyr::drop_na(),
+                         ggplot2::aes(label = paste0("OR = ", sprintf("%.2g", signif(estimate, 2)), "\n(", lb, ",", ub, ")")),
                 col = text_col)
   }
   if(ci & sig){
@@ -147,13 +150,15 @@ plot_heatmap = function(data,
     assertthat::assert_that("p" %in% colnames(data),
                             msg = "'p' must be column in data")
     p = p +
-      ggplot2::geom_text(ggplot2::aes(label = paste0("OR = ", sprintf("%.2g", signif(estimate, 2)), "\n(", lb, ",", ub, ")",
+      ggplot2::geom_text(data = data %>% tidyr::drop_na(),
+                         ggplot2::aes(label = paste0("OR = ", sprintf("%.2g", signif(estimate, 2)), "\n(", lb, ",", ub, ")",
                                    "\np = ", p)),
                 col = text_col)
   }
   if(!sig & !ci){
     p = p +
-      ggplot2::geom_text(ggplot2::aes(label = paste0("OR = ", sprintf("%.2g", signif(estimate, 2)))),
+      ggplot2::geom_text(data = data %>% tidyr::drop_na(),
+                         ggplot2::aes(label = paste0("OR = ", sprintf("%.2g", signif(estimate, 2)))),
                 col = text_col)
   }
   if (!is.null(facet_var)){

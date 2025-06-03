@@ -32,7 +32,7 @@ pak::pak("jhuwit/bloodlines")
 ## Lasagna plots
 
 
-```{r example}
+```{r lasgana}
 library(bloodlines)
 ## basic example code
 data(sample_df)
@@ -52,9 +52,11 @@ sample_df_clean =
                 time = time / 60)
 
 # paletteer::paletteer_d("colorBlindness::Blue2DarkRed12Steps")
-cols = c("[0,65)" = "#D82632FF",
-               "[65,Inf)" = "#264DFFFF",
-               "Missing" = "darkgrey")
+cols = c(
+  "[0,65)" = "#D82632FF",
+  "[65,Inf)" = "#264DFFFF",
+  "Missing" = "darkgrey"
+)
 
 plot_lasagna(data = sample_df_clean,
              facet_var = "cat_cpb",
@@ -71,9 +73,7 @@ plot_lasagna(data = sample_df_clean,
 
 ## Lasagna plots (time series version)
 
-```{r example 2}
-
-
+```{r time series lasagna}
 sample_df_clean2 = 
   sample_df_clean %>% 
   dplyr::group_by(id) %>% 
@@ -95,5 +95,52 @@ plot_ts_lasagna(data = sample_df_clean2,
              xbreaks = seq(0, 4, 1),
              col_vector = cols)
 
+
+```
+## Heatmap from regression results 
+
+```{r heatmap}
+data(reg_df)
+
+plot_heatmap(data = reg_df,
+             xvar = "x",
+             yvar = "y",
+             estvar = "estimate",
+             fill_lab = "Odds Ratio",
+             xlab = "Hemodynamic Range",
+             ylab = "Hemodynamic Range",
+             title = "Regression Results",
+             sig = TRUE,
+             text_col = "black",
+             fill_scheme = "gradient2")
+
+## example using custom palette and only showing significance 
+plot_heatmap(data = reg_df,
+             xvar = "x",
+             yvar = "y",
+             estvar = "estimate",
+             fill_lab = "Odds Ratio",
+             xlab = "Hemodynamic Range",
+             ylab = "Hemodynamic Range",
+             title = "Regression Results",
+             sig = TRUE,
+             text_col = "black",
+             fill_scheme = "palette",
+             palette = "viridis::plasma",
+             show_only_sig = TRUE)
+
+## example using number of colors 
+# plot_heatmap(data = reg_df,
+#              xvar = "x",
+#              yvar = "y",
+#              estvar = "estimate",
+#              fill_lab = "Odds Ratio",
+#              xlab = "Hemodynamic Range",
+#              ylab = "Hemodynamic Range",
+#              title = "Regression Results",
+#              sig = TRUE,
+#              text_col = "black",
+#              fill_scheme = "gradientn",
+#              n_colors = 10)
 
 ```

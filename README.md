@@ -19,7 +19,7 @@ pak::pak("jhuwit/bloodlines")
 #> ℹ Loading metadata database✔ Loading metadata database ... done
 #>  
 #> ℹ No downloads are needed
-#> ✔ 1 pkg + 32 deps: kept 21 [9.5s]
+#> ✔ 1 pkg + 36 deps: kept 24 [8.8s]
 ```
 
 ## Lasagna plots
@@ -33,7 +33,7 @@ plot_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
              layer_var = "cat_map")
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-lasgana-1.png" width="100%" />
 
 ``` r
 
@@ -49,9 +49,11 @@ sample_df_clean =
                 time = time / 60)
 
 # paletteer::paletteer_d("colorBlindness::Blue2DarkRed12Steps")
-cols = c("[0,65)" = "#D82632FF",
-               "[65,Inf)" = "#264DFFFF",
-               "Missing" = "darkgrey")
+cols = c(
+  "[0,65)" = "#D82632FF",
+  "[65,Inf)" = "#264DFFFF",
+  "Missing" = "darkgrey"
+)
 
 plot_lasagna(data = sample_df_clean,
              facet_var = "cat_cpb",
@@ -66,13 +68,11 @@ plot_lasagna(data = sample_df_clean,
 #> (`geom_bar()`).
 ```
 
-<img src="man/figures/README-example-2.png" width="100%" />
+<img src="man/figures/README-lasgana-2.png" width="100%" />
 
 ## Lasagna plots (time series version)
 
 ``` r
-
-
 sample_df_clean2 = 
   sample_df_clean %>% 
   dplyr::group_by(id) %>% 
@@ -84,7 +84,7 @@ plot_ts_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
              layer_var = "cat_map")
 ```
 
-<img src="man/figures/README-example 2-1.png" width="100%" />
+<img src="man/figures/README-time series lasagna-1.png" width="100%" />
 
 ``` r
 
@@ -102,4 +102,60 @@ plot_ts_lasagna(data = sample_df_clean2,
 #> (`geom_tile()`).
 ```
 
-<img src="man/figures/README-example 2-2.png" width="100%" />
+<img src="man/figures/README-time series lasagna-2.png" width="100%" />
+\## Heatmap from regression results
+
+``` r
+data(reg_df)
+
+plot_heatmap(data = reg_df,
+             xvar = "x",
+             yvar = "y",
+             estvar = "estimate",
+             fill_lab = "Odds Ratio",
+             xlab = "Hemodynamic Range",
+             ylab = "Hemodynamic Range",
+             title = "Regression Results",
+             sig = TRUE,
+             text_col = "black",
+             fill_scheme = "gradient2")
+```
+
+<img src="man/figures/README-heatmap-1.png" width="100%" />
+
+``` r
+
+## example using custom palette and only showing significance 
+plot_heatmap(data = reg_df,
+             xvar = "x",
+             yvar = "y",
+             estvar = "estimate",
+             fill_lab = "Odds Ratio",
+             xlab = "Hemodynamic Range",
+             ylab = "Hemodynamic Range",
+             title = "Regression Results",
+             sig = TRUE,
+             text_col = "black",
+             fill_scheme = "palette",
+             palette = "viridis::plasma",
+             show_only_sig = TRUE)
+```
+
+<img src="man/figures/README-heatmap-2.png" width="100%" />
+
+``` r
+
+## example using number of colors 
+# plot_heatmap(data = reg_df,
+#              xvar = "x",
+#              yvar = "y",
+#              estvar = "estimate",
+#              fill_lab = "Odds Ratio",
+#              xlab = "Hemodynamic Range",
+#              ylab = "Hemodynamic Range",
+#              title = "Regression Results",
+#              sig = TRUE,
+#              text_col = "black",
+#              fill_scheme = "gradientn",
+#              n_colors = 10)
+```

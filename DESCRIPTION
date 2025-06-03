@@ -17,7 +17,8 @@ Imports:
     dplyr,
     ggplot2,
     magrittr,
-    paletteer
+    paletteer,
+    tidyr
 Depends: 
     R (>= 3.5)
 LazyData: true
