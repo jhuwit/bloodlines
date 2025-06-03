@@ -153,7 +153,7 @@ data(mult_reg_df)
 
 
 p = plot_j(mult_reg_df, col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"))
-p + ggplot2::theme(axis.text.x =  ggplot2::element_text(angle = 45))
+p + ggplot2::theme(axis.text.x =  ggplot2::element_text(angle = 45, vjust = .5))
 ```
 
 <img src="man/figures/README-j_plot-1.png" width="100%" />
@@ -175,7 +175,7 @@ p = plot_j(
   x_label = "MAP Range",
   y_label = "Odds Ratio"
 )
-p + ggplot2::theme(axis.text.x =  ggplot2::element_text(angle = 45))
+p + ggplot2::theme(axis.text.x =  ggplot2::element_text(angle = 45, vjust = .5, size= 10))
 ```
 
 <img src="man/figures/README-j_plot-2.png" width="100%" />
