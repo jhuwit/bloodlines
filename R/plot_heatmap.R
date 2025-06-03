@@ -34,7 +34,7 @@
 #' data(reg_df)
 #'
 #' # Run the function
-#' plot_heatmap(reg_df)
+#' print(plot_heatmap(reg_df))
 #'
 plot_heatmap = function(data,
                         facet_var = NULL,
@@ -162,7 +162,7 @@ plot_heatmap = function(data,
                             msg = "'facet_var' must be in colnames of data")
     p = p + ggplot2::facet_wrap(~data[[facet_var]])
   }
-  print(p)
+  return(p)
 }
 
 

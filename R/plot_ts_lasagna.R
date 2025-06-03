@@ -13,7 +13,7 @@
 #' @param title Title of the plot (default is "")
 #' @param xlims Limits for the x-axis (default is NULL)
 #' @param xbreaks Breaks for the x-axis (default is NULL)
-#' @param col_vector A named vector of colors for the layers (default is NULL, which uses default ggplot colors)
+#' @param col_vec A named vector of colors for the layers (default is NULL, which uses default ggplot colors)
 #' @param legend_pos Position of the legend (default is "bottom")
 #' @return A lasagna plot
 #' @export
@@ -22,14 +22,14 @@
 #' data(sample_df)
 #'
 #' # Run the function
-#' plot_ts_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map")
+#' print(plot_ts_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map"))
 #'
 
 plot_ts_lasagna =
   function(data,
            facet_var = NULL,
            layer_var = NULL,
-           col_vector = NULL,
+           col_vec = NULL,
            legend_pos = "bottom",
            xlab = "",
            ylab = "",
@@ -48,7 +48,7 @@ plot_ts_lasagna =
                             msg = "'time' column must be numeric")
 
 
-    if (is.null(col_vector)) {
+    if (is.null(col_vec)) {
       p = data %>%
         dplyr::rename(layer_var = {{layer_var}},
                facet_var = {{facet_var}}) %>%
@@ -70,11 +70,11 @@ plot_ts_lasagna =
              y = paste0(ylab),
              title = paste0(title))
     } else {
-      assertthat::assert_that(all(!is.null(names(col_vector)) &
-                                    names(col_vector) != ""),
+      assertthat::assert_that(all(!is.null(names(col_vec)) &
+                                    names(col_vec) != ""),
                               msg = "Color vector must be named")
       layer_var_names = unique(data %>% dplyr::pull({{layer_var}}))
-      col_vec_names = names(col_vector)
+      col_vec_names = names(col_vec)
 
       assertthat::assert_that(setequal(layer_var_names, col_vec_names),
                               msg = "Names of color vector must be same as levels of layer_var")
@@ -94,10 +94,10 @@ plot_ts_lasagna =
         ggplot2:: theme(legend.position = legend_pos,
               axis.text.y = element_blank()) +
         ggplot2::scale_color_manual(name = "",
-                           values = col_vector,
+                           values = col_vec,
                            na.translate = TRUE) +
         ggplot2::scale_fill_manual(name = "",
-                          values = col_vector,
+                          values = col_vec,
                           na.translate = TRUE) +
         ggplot2::labs(x = paste0(xlab),
              y = paste0(ylab),
@@ -117,6 +117,6 @@ plot_ts_lasagna =
       p = p + ggplot2::scale_x_continuous(breaks = xbreaks)
     }
 
-    print(p)
+    return(p)
   }
 

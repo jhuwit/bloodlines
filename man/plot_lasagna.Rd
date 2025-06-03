@@ -14,7 +14,7 @@ plot_lasagna(
   proportion = TRUE,
   xlims = NULL,
   xbreaks = NULL,
-  col_vector = NULL,
+  col_vec = NULL,
   legend_pos = "bottom"
 )
 }
@@ -37,7 +37,7 @@ plot_lasagna(
 
 \item{xbreaks}{Breaks for the x-axis (default is NULL)}
 
-\item{col_vector}{A named vector of colors for the layers (default is NULL, which uses default ggplot colors)}
+\item{col_vec}{A named vector of colors for the layers (default is NULL, which uses default ggplot colors)}
 
 \item{legend_pos}{Position of the legend (default is "bottom")}
 }
@@ -52,6 +52,6 @@ Create a lasagna plot from hemodynamics time series
 data(sample_df)
 
 # Run the function
-plot_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map")
+print(plot_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map"))
 
 }

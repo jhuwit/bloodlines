@@ -23,7 +23,7 @@
 #' data(mult_reg_df)
 #'
 #' # Run the function
-#' plot_j(mult_reg_df, col_vec = c("A"= "#1E8E99", "B" = "#FF8E32"))
+#' print(plot_j(mult_reg_df, col_vec = c("A"= "#1E8E99", "B" = "#FF8E32")))
 #'
 plot_j = function(data,
                   facet_var = NULL,
@@ -133,5 +133,5 @@ plot_j = function(data,
     p = p + ggplot2::facet_wrap(~data[[facet_var]])
   }
 
-  print(p)
+  return(p)
 }

@@ -79,6 +79,6 @@ Create a heatmap from regression results where regression predictors can be repr
 data(reg_df)
 
 # Run the function
-plot_heatmap(reg_df)
+print(plot_heatmap(reg_df))
 
 }

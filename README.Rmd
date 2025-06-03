@@ -49,7 +49,8 @@ sample_df_clean =
                 cat_cpb = factor(cat_cpb,
                                  levels = c("pre", "post"),
                                  labels = c("Pre-CPB", "Post-CPB")),
-                time = time / 60)
+                time = time / 60) %>% 
+  print()
 
 # paletteer::paletteer_d("colorBlindness::Blue2DarkRed12Steps")
 cols = c(
@@ -66,7 +67,8 @@ plot_lasagna(data = sample_df_clean,
              title = "Lasagna Plot",
              xlims = c(0, 4),
              xbreaks = seq(0, 4, 1),
-             col_vector = cols)
+             col_vec = cols) %>% 
+  print()
 
 
 ```
@@ -82,7 +84,8 @@ sample_df_clean2 =
   dplyr::mutate(id = forcats::fct_reorder(id, n))
 plot_ts_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
              facet_var = "cat_cpb",
-             layer_var = "cat_map")
+             layer_var = "cat_map") %>% 
+  print()
 
 
 plot_ts_lasagna(data = sample_df_clean2,
@@ -93,7 +96,8 @@ plot_ts_lasagna(data = sample_df_clean2,
              title = "Time series lasagna Plot",
              xlims = c(0, 4),
              xbreaks = seq(0, 4, 1),
-             col_vector = cols)
+             col_vec = cols) %>% 
+  print()
 
 
 ```
@@ -109,7 +113,8 @@ plot_heatmap(data = reg_df,
              title = "Regression Results",
              sig = TRUE,
              text_col = "black",
-             fill_scheme = "gradient2")
+             fill_scheme = "gradient2") %>% 
+  print()
 
 ## example using custom palette and only showing significance 
 plot_heatmap(data = reg_df,
@@ -121,7 +126,8 @@ plot_heatmap(data = reg_df,
              text_col = "black",
              fill_scheme = "palette",
              palette = "viridis::plasma",
-             show_only_sig = TRUE)
+             show_only_sig = TRUE) %>% 
+  print()
 
 ## example using number of colors 
 plot_heatmap(data = reg_df,
@@ -132,7 +138,8 @@ plot_heatmap(data = reg_df,
              sig = TRUE,
              text_col = "black",
              fill_scheme = "gradientn",
-             n_colors = 5)
+             n_colors = 5) %>% 
+  print()
 
 ```
 
@@ -144,8 +151,8 @@ plot_heatmap(data = reg_df,
 data(mult_reg_df)
 
 
-plot_j(mult_reg_df, col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"))
-
+p = plot_j(mult_reg_df, col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"))
+p + ggplot2::theme(axis.text.x =  ggplot2::element_text(angle = 90))
 
 ## example with facets 
 
@@ -155,11 +162,15 @@ facet_data =
   dplyr::bind_rows(mult_reg_df %>% dplyr::mutate(v1 = "Post-CPB")) %>% 
   dplyr::mutate(v1 = forcats::fct_rev(v1))
 
-plot_j(
+p = plot_j(
   facet_data,
   col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"),
-  facet_var = "v1"
+  facet_var = "v1",
+  x_label = "MAP Range",
+  y_label = "Odds Ratio"
 )
+p + ggplot2::theme(axis.text.x =  ggplot2::element_text(angle = 90))
+
 
 
 ```

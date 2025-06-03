@@ -18,8 +18,17 @@ You can install the development version of bloodlines from
 pak::pak("jhuwit/bloodlines")
 #> ℹ Loading metadata database✔ Loading metadata database ... done
 #>  
-#> ℹ No downloads are needed
-#> ✔ 1 pkg + 40 deps: kept 27 [8.9s]
+#> → Will update 1 package.
+#> → Will download 1 package with unknown size.
+#> + bloodlines 0.0.0.9000 → 0.0.0.9000 👷‍♂️🔧 ⬇ (GitHub: 20d2577)
+#> ℹ Getting 1 pkg with unknown size
+#> ✔ Got bloodlines 0.0.0.9000 (source) (3.83 MB)
+#> ℹ Packaging bloodlines 0.0.0.9000
+#> ✔ Packaged bloodlines 0.0.0.9000 (1.2s)
+#> ℹ Building bloodlines 0.0.0.9000
+#> ✔ Built bloodlines 0.0.0.9000 (4.1s)
+#> ✔ Installed bloodlines 0.0.0.9000 (github::jhuwit/bloodlines@20d2577) (92ms)
+#> ✔ 1 pkg + 40 deps: kept 26, upd 1, dld 1 (NA B) [16.8s]
 ```
 
 ## Lasagna plots
@@ -63,7 +72,7 @@ plot_lasagna(data = sample_df_clean,
              title = "Lasagna Plot",
              xlims = c(0, 4),
              xbreaks = seq(0, 4, 1),
-             col_vector = cols)
+             col_vec = cols)
 #> Warning: Removed 5 rows containing missing values or values outside the scale range
 #> (`geom_bar()`).
 ```
@@ -97,7 +106,7 @@ plot_ts_lasagna(data = sample_df_clean2,
              title = "Time series lasagna Plot",
              xlims = c(0, 4),
              xbreaks = seq(0, 4, 1),
-             col_vector = cols)
+             col_vec = cols)
 #> Warning: Removed 200 rows containing missing values or values outside the scale range
 #> (`geom_tile()`).
 ```
@@ -172,7 +181,8 @@ plot_j(mult_reg_df, col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"))
 facet_data =
   mult_reg_df %>%
   dplyr::mutate(v1 = "Pre-CPB") %>%
-  dplyr::bind_rows(mult_reg_df %>% dplyr::mutate(v1 = "Post-CPB"))
+  dplyr::bind_rows(mult_reg_df %>% dplyr::mutate(v1 = "Post-CPB")) %>% 
+  dplyr::mutate(v1 = forcats::fct_rev(v1))
 
 plot_j(
   facet_data,

@@ -61,6 +61,6 @@ Create a 'j-plot' from regression results from multiple models
 data(mult_reg_df)
 
 # Run the function
-plot_j(mult_reg_df, col_vec = c("A"= "#1E8E99", "B" = "#FF8E32"))
+print(plot_j(mult_reg_df, col_vec = c("A"= "#1E8E99", "B" = "#FF8E32")))
 
 }
