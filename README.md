@@ -19,7 +19,7 @@ pak::pak("jhuwit/bloodlines")
 #> ℹ Loading metadata database✔ Loading metadata database ... done
 #>  
 #> ℹ No downloads are needed
-#> ✔ 1 pkg + 40 deps: kept 27 [9.4s]
+#> ✔ 1 pkg + 40 deps: kept 27 [8.9s]
 ```
 
 ## Lasagna plots
@@ -84,7 +84,7 @@ plot_ts_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
              layer_var = "cat_map")
 ```
 
-<img src="man/figures/README-time series lasagna-1.png" width="100%" />
+<img src="man/figures/README-time_series_lasagna-1.png" width="100%" />
 
 ``` r
 
@@ -102,16 +102,13 @@ plot_ts_lasagna(data = sample_df_clean2,
 #> (`geom_tile()`).
 ```
 
-<img src="man/figures/README-time series lasagna-2.png" width="100%" />
+<img src="man/figures/README-time_series_lasagna-2.png" width="100%" />
 \## Heatmap from regression results
 
 ``` r
 data(reg_df)
 
 plot_heatmap(data = reg_df,
-             xvar = "x",
-             yvar = "y",
-             estvar = "estimate",
              fill_lab = "Odds Ratio",
              xlab = "Hemodynamic Range",
              ylab = "Hemodynamic Range",
@@ -127,9 +124,6 @@ plot_heatmap(data = reg_df,
 
 ## example using custom palette and only showing significance 
 plot_heatmap(data = reg_df,
-             xvar = "x",
-             yvar = "y",
-             estvar = "estimate",
              fill_lab = "Odds Ratio",
              xlab = "Hemodynamic Range",
              ylab = "Hemodynamic Range",
@@ -147,9 +141,6 @@ plot_heatmap(data = reg_df,
 
 ## example using number of colors 
 plot_heatmap(data = reg_df,
-             xvar = "x",
-             yvar = "y",
-             estvar = "estimate",
              fill_lab = "Odds Ratio",
              xlab = "Hemodynamic Range",
              ylab = "Hemodynamic Range",
@@ -161,3 +152,33 @@ plot_heatmap(data = reg_df,
 ```
 
 <img src="man/figures/README-heatmap-3.png" width="100%" />
+
+## J plot from regression results
+
+``` r
+data(mult_reg_df)
+
+
+plot_j(mult_reg_df, col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"))
+```
+
+<img src="man/figures/README-j_plot-1.png" width="100%" />
+
+``` r
+
+
+## example with facets 
+
+facet_data =
+  mult_reg_df %>%
+  dplyr::mutate(v1 = "Pre-CPB") %>%
+  dplyr::bind_rows(mult_reg_df %>% dplyr::mutate(v1 = "Post-CPB"))
+
+plot_j(
+  facet_data,
+  col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"),
+  facet_var = "v1"
+)
+```
+
+<img src="man/figures/README-j_plot-2.png" width="100%" />

@@ -143,8 +143,23 @@ plot_heatmap(data = reg_df,
 ```{r j_plot}
 data(mult_reg_df)
 
-plot_j(mult_reg_df, col_vec = c("A"= "#1E8E99", "B" = "#FF8E32"))
 
+plot_j(mult_reg_df, col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"))
+
+
+## example with facets 
+
+facet_data =
+  mult_reg_df %>%
+  dplyr::mutate(v1 = "Pre-CPB") %>%
+  dplyr::bind_rows(mult_reg_df %>% dplyr::mutate(v1 = "Post-CPB")) %>% 
+  dplyr::mutate(v1 = forcats::fct_rev(v1))
+
+plot_j(
+  facet_data,
+  col_vec = c("A" = "#1E8E99", "B" = "#FF8E32"),
+  facet_var = "v1"
+)
 
 
 ```
