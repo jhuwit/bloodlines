@@ -110,9 +110,9 @@ plot_heatmap = function(data,
   } else if(fill_scheme == "gradientn"){
     assertthat::assert_that(!(is.null(n_colors)) | !is.null(color_vec),
                             msg = "must provide vector of colors OR number of colors for gradient n scale")
-    if(!is.null(color_vec)){
+    if(is.null(color_vec)){
       p = p +
-        ggplot2::scale_fill_gradientn(colorspace::diverge_hcl(n_colors),
+        ggplot2::scale_fill_gradientn(colors = colorspace::diverge_hcl(n_colors),
                                       name = paste0(fill_lab))
     } else {
       p = p +
