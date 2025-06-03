@@ -22,7 +22,7 @@
 #' data(sample_df)
 #'
 #' # Run the function
-#' plot_ts_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "map_cat")
+#' plot_ts_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map")
 #'
 
 plot_ts_lasagna =
@@ -36,7 +36,8 @@ plot_ts_lasagna =
            title = "",
            xlims = NULL,
            xbreaks = NULL){
-
+    time = id = NULL
+    rm(list = c("time", "id"))
     assertthat::assert_that(is.data.frame(data),
                             msg = "data must be a data frame.")
     assertthat::assert_that(layer_var %in% colnames(data),

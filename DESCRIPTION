@@ -13,9 +13,11 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     assertthat,
+    colorspace,
     dplyr,
     ggplot2,
-    magrittr
+    magrittr,
+    paletteer
 Depends: 
     R (>= 3.5)
 LazyData: true

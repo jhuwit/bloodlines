@@ -30,7 +30,7 @@ library(bloodlines)
 data(sample_df)
 plot_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
              facet_var = "cat_cpb",
-             layer_var = "map_cat")
+             layer_var = "cat_map")
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
@@ -41,8 +41,8 @@ plot_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
 sample_df_clean = 
   sample_df %>% 
   dplyr::filter(cat_cpb != "intra") %>% 
-  dplyr::mutate(map_cat = forcats::fct_na_value_to_level(map_cat, level = "Missing"),
-                map_cat = forcats::fct_rev(map_cat),
+  dplyr::mutate(cat_map = forcats::fct_na_value_to_level(cat_map, level = "Missing"),
+                cat_map = forcats::fct_rev(cat_map),
                 cat_cpb = factor(cat_cpb,
                                  levels = c("pre", "post"),
                                  labels = c("Pre-CPB", "Post-CPB")),
@@ -55,7 +55,7 @@ cols = c("[0,65)" = "#D82632FF",
 
 plot_lasagna(data = sample_df_clean,
              facet_var = "cat_cpb",
-             layer_var = "map_cat",
+             layer_var = "cat_map",
              xlab = "Time (hr)",
              ylab = "Proportion of Pts",
              title = "Lasagna Plot",
@@ -81,7 +81,7 @@ sample_df_clean2 =
   dplyr::mutate(id = forcats::fct_reorder(id, n))
 plot_ts_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
              facet_var = "cat_cpb",
-             layer_var = "map_cat")
+             layer_var = "cat_map")
 ```
 
 <img src="man/figures/README-example 2-1.png" width="100%" />
@@ -91,7 +91,7 @@ plot_ts_lasagna(sample_df %>% dplyr::filter(cat_cpb != "intra"),
 
 plot_ts_lasagna(data = sample_df_clean2,
              facet_var = "cat_cpb",
-             layer_var = "map_cat",
+             layer_var = "cat_map",
              xlab = "Time (hr)",
              ylab = "Patient",
              title = "Time series lasagna Plot",

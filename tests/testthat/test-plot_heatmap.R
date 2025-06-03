@@ -1,10 +1,12 @@
-testthat::test_that("create ts lastagna", {
+testthat::test_that("create heatmap", {
 
   # Load example data
-  data(sample_df)
+  data(reg_df)
 
   # Test with default parameters
-  p <- plot_ts_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map")
+  p <- plot_heatmap(data = reg_df,
+                    xvar = "x",
+                    yvar = "y")
 
   # Check if the plot is a ggplot object
   expect_true(inherits(p, "gg"))

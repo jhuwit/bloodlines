@@ -23,7 +23,7 @@
 #' data(sample_df)
 #'
 #' # Run the function
-#' plot_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "map_cat")
+#' plot_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map")
 #'
 
 plot_lasagna = function(data,
@@ -41,7 +41,8 @@ plot_lasagna = function(data,
     is.data.frame(data),
     msg = "Data must be a data frame."
   )
-
+  time = NULL
+  rm(list = c("time"))
   assertthat::assert_that(layer_var %in% colnames(data),
                           msg = "'layer_var' must be in colnames of data")
   assertthat::assert_that(all(c("time", "id") %in% colnames(data)),

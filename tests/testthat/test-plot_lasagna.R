@@ -4,7 +4,7 @@ testthat::test_that("create lasagna", {
   data(sample_df)
 
   # Test with default parameters
-  p <- plot_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "map_cat")
+  p <- plot_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map")
 
   # Check if the plot is a ggplot object
   expect_true(inherits(p, "gg"))

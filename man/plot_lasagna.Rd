@@ -52,6 +52,6 @@ Create a lasagna plot from hemodynamics time series
 data(sample_df)
 
 # Run the function
-plot_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "map_cat")
+plot_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map")
 
 }
