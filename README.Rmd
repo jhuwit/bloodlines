@@ -116,9 +116,6 @@ plot_heatmap(data = reg_df,
 
 ## example using custom palette and only showing significance 
 plot_heatmap(data = reg_df,
-             xvar = "x",
-             yvar = "y",
-             estvar = "estimate",
              fill_lab = "Odds Ratio",
              xlab = "Hemodynamic Range",
              ylab = "Hemodynamic Range",
@@ -130,17 +127,14 @@ plot_heatmap(data = reg_df,
              show_only_sig = TRUE)
 
 ## example using number of colors 
-# plot_heatmap(data = reg_df,
-#              xvar = "x",
-#              yvar = "y",
-#              estvar = "estimate",
-#              fill_lab = "Odds Ratio",
-#              xlab = "Hemodynamic Range",
-#              ylab = "Hemodynamic Range",
-#              title = "Regression Results",
-#              sig = TRUE,
-#              text_col = "black",
-#              fill_scheme = "gradientn",
-#              n_colors = 10)
+plot_heatmap(data = reg_df,
+             fill_lab = "Odds Ratio",
+             xlab = "Hemodynamic Range",
+             ylab = "Hemodynamic Range",
+             title = "Regression Results",
+             sig = TRUE,
+             text_col = "black",
+             fill_scheme = "gradientn",
+             n_colors = 5)
 
 ```

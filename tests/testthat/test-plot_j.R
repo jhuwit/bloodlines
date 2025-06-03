@@ -1,10 +1,10 @@
-testthat::test_that("create heatmap", {
+testthat::test_that("create j-plot", {
 
   # Load example data
-  data(reg_df)
+  data(mult_reg_df)
 
   # Test with default parameters
-  p <- plot_heatmap(data = reg_df)
+  p <- plot_j(data = mult_reg_df)
 
   # Check if the plot is a ggplot object
   expect_true(inherits(p, "gg"))

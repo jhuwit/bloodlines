@@ -7,15 +7,8 @@
 #' @importFrom paletteer scale_fill_paletteer_c
 #' @importFrom colorspace diverge_hcl
 #'
-#' @param data A data frame containing regression results with variables to be plotted on x and y axes and estimate from regression and columns p, lb, ub for p-value, upper and lower bounds of CI
-#' @param xvar Name of the variable that will be on x-axis, must be character or factor
-#' @param yvar Name of variable that will be on y-axis, must be character or factor
-#' @param estvar Name of variable with regression result estimate, default is "estimate"
+#' @param data A data frame containing regression results, must include columns x, y, estimate, p, lb, ub for p-value, upper and lower bounds of CI
 #' @param facet_var A variable to facet the plot by (optional)
-#' @param fill_lab Label for the fill aesthetic (default is "")
-#' @param xlab Label for the x-axis (default is "")
-#' @param ylab Label for the y-axis (default is "")
-#' @param title Title of the plot (default is "")
 #' @param sig Logical indicating whether to show significance (default is FALSE)
 #' @param ci Logical indicating whether to show confidence intervals (default is FALSE)
 #' @param show_only_sig Logical indicating whether to show only significant results (default is FALSE)
@@ -28,8 +21,12 @@
 #' @param mid_value Midpoint value for the 'gradient2' fill scheme (default is 1)
 #' @param color_vec A vector of colors for the 'gradientn' fill scheme
 #' @param n_colors Number of colors for the 'gradientn' fill scheme
-#' @param palette A palette name for the 'palette' fill scheme (default is NULL)
+#' @param palette A palette name for the 'palette' fill scheme (default is NULL), e.g.  "viridis::plasma"
 #' @param legend_pos Position of the legend (default is "bottom")
+#' @param fill_lab Label for the fill aesthetic (default is "")
+#' @param xlab Label for the x-axis (default is "")
+#' @param ylab Label for the y-axis (default is "")
+#' @param title Title of the plot (default is "")
 #' @return A heatmap
 #' @export
 #' @examples
@@ -37,16 +34,9 @@
 #' data(reg_df)
 #'
 #' # Run the function
-#' plot_ts_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map")
+#' plot_heatmap(reg_df)
 #'
 plot_heatmap = function(data,
-                        xvar,
-                        yvar,
-                        estvar = "estimate",
-                        fill_lab = "",
-                        xlab = "",
-                        ylab = "",
-                        title = "",
                         facet_var = NULL,
                         sig = FALSE,
                         ci = FALSE,
@@ -61,21 +51,27 @@ plot_heatmap = function(data,
                         color_vec = NULL,
                         n_colors = NULL,
                         palette = NULL,
-                        legend_pos = "bottom"){
+                        legend_pos = "bottom",
+                        fill_lab = "",
+                        xlab = "",
+                        ylab = "",
+                        title = ""){
 
-  estimate = lb = ub = p = NULL # to avoid R CMD check notes about undefined global variables
-  rm(list = c("estimate", "lb", "ub", "p"))
+  estimate = lb = ub = p = x = y = NULL # to avoid R CMD check notes about undefined global variables
+  rm(list = c("estimate", "lb", "ub", "p", "x", "y"))
+
+  reqnames = c("x", "y", "estimate")
+  assertthat::assert_that(all(reqnames %in% colnames(data)),
+                          msg = paste0("Data must contain columns: ", paste(reqnames, collapse = ", ")))
+
   assertthat::assert_that(fill_scheme %in% c("gradient", "gradient2", "gradientn", "palette"),
                           msg = "'fill_scheme' must be one of 'gradient', 'gradient2', 'gradientn', 'palette'")
-  data = data %>%
-    rename(xvar = {{xvar}},
-           yvar = {{yvar}},
-           estimate = {{estvar}})
-  assertthat::assert_that(is.factor(data$xvar) | is.character(data$xvar),
-                          msg = "'xvar' must be character or factor")
 
-  assertthat::assert_that(is.factor(data$yvar) | is.character(data$yvar),
-                          msg = "'yvar' must be character or factor")
+  assertthat::assert_that(is.factor(data$x) | is.character(data$x),
+                          msg = "'x' must be character or factor")
+
+  assertthat::assert_that(is.factor(data$y) | is.character(data$y),
+                          msg = "'y' must be character or factor")
 
 
   if(show_only_sig){
@@ -89,7 +85,7 @@ plot_heatmap = function(data,
   }
 
   p = data %>%
-    ggplot2::ggplot(ggplot2::aes(x = xvar, y = yvar, fill = estimate)) +
+    ggplot2::ggplot(ggplot2::aes(x = x, y = y, fill = estimate)) +
     ggplot2::geom_tile(color = "black") +
     ggplot2::theme_minimal() +
     ggplot2::labs(x = paste0(xlab),

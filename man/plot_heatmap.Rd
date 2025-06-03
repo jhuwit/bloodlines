@@ -6,13 +6,6 @@
 \usage{
 plot_heatmap(
   data,
-  xvar,
-  yvar,
-  estvar = "estimate",
-  fill_lab = "",
-  xlab = "",
-  ylab = "",
-  title = "",
   facet_var = NULL,
   sig = FALSE,
   ci = FALSE,
@@ -27,25 +20,15 @@ plot_heatmap(
   color_vec = NULL,
   n_colors = NULL,
   palette = NULL,
-  legend_pos = "bottom"
+  legend_pos = "bottom",
+  fill_lab = "",
+  xlab = "",
+  ylab = "",
+  title = ""
 )
 }
 \arguments{
-\item{data}{A data frame containing regression results with variables to be plotted on x and y axes and estimate from regression and columns p, lb, ub for p-value, upper and lower bounds of CI}
-
-\item{xvar}{Name of the variable that will be on x-axis, must be character or factor}
-
-\item{yvar}{Name of variable that will be on y-axis, must be character or factor}
-
-\item{estvar}{Name of variable with regression result estimate, default is "estimate"}
-
-\item{fill_lab}{Label for the fill aesthetic (default is "")}
-
-\item{xlab}{Label for the x-axis (default is "")}
-
-\item{ylab}{Label for the y-axis (default is "")}
-
-\item{title}{Title of the plot (default is "")}
+\item{data}{A data frame containing regression results, must include columns x, y, estimate, p, lb, ub for p-value, upper and lower bounds of CI}
 
 \item{facet_var}{A variable to facet the plot by (optional)}
 
@@ -73,9 +56,17 @@ plot_heatmap(
 
 \item{n_colors}{Number of colors for the 'gradientn' fill scheme}
 
-\item{palette}{A palette name for the 'palette' fill scheme (default is NULL)}
+\item{palette}{A palette name for the 'palette' fill scheme (default is NULL), e.g.  "viridis::plasma"}
 
 \item{legend_pos}{Position of the legend (default is "bottom")}
+
+\item{fill_lab}{Label for the fill aesthetic (default is "")}
+
+\item{xlab}{Label for the x-axis (default is "")}
+
+\item{ylab}{Label for the y-axis (default is "")}
+
+\item{title}{Title of the plot (default is "")}
 }
 \value{
 A heatmap
@@ -88,6 +79,6 @@ Create a heatmap from regression results where regression predictors can be repr
 data(reg_df)
 
 # Run the function
-plot_ts_lasagna(sample_df, facet_var = "cat_cpb", layer_var = "cat_map")
+plot_heatmap(reg_df)
 
 }

@@ -19,7 +19,7 @@ pak::pak("jhuwit/bloodlines")
 #> ℹ Loading metadata database✔ Loading metadata database ... done
 #>  
 #> ℹ No downloads are needed
-#> ✔ 1 pkg + 40 deps: kept 27 [9.7s]
+#> ✔ 1 pkg + 40 deps: kept 27 [9.4s]
 ```
 
 ## Lasagna plots
@@ -146,16 +146,18 @@ plot_heatmap(data = reg_df,
 ``` r
 
 ## example using number of colors 
-# plot_heatmap(data = reg_df,
-#              xvar = "x",
-#              yvar = "y",
-#              estvar = "estimate",
-#              fill_lab = "Odds Ratio",
-#              xlab = "Hemodynamic Range",
-#              ylab = "Hemodynamic Range",
-#              title = "Regression Results",
-#              sig = TRUE,
-#              text_col = "black",
-#              fill_scheme = "gradientn",
-#              n_colors = 10)
+plot_heatmap(data = reg_df,
+             xvar = "x",
+             yvar = "y",
+             estvar = "estimate",
+             fill_lab = "Odds Ratio",
+             xlab = "Hemodynamic Range",
+             ylab = "Hemodynamic Range",
+             title = "Regression Results",
+             sig = TRUE,
+             text_col = "black",
+             fill_scheme = "gradientn",
+             n_colors = 5)
 ```
+
+<img src="man/figures/README-heatmap-3.png" width="100%" />

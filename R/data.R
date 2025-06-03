@@ -32,4 +32,18 @@
 #' @source Simulated data, see https://github.com/jhuwit/fine_mapping_sim
 "reg_df"
 
-
+#' Example regression results from multiple models and regressions
+#'
+#' A simulated regressions result dataset included in bloodlines to illustrate usage
+#'
+#' @format A tibble with 20 rows and 6 columns
+#' \describe{
+#'   \item{variable}{Factor: main variable included  in regression}
+#'   \item{estimate}{Numeric: Odds ratio estimate}
+#'   \item{width}{Numeric: width of confidence interval}
+#'   \item{ub}{Numeric: upper bound of confidence interval}
+#'   \item{lb}{Numeric: lower bound of confidence interval}
+#'   \item{model}{Character: model that estimate came from}
+#' }
+#' @source Simulated data, see https://github.com/jhuwit/fine_mapping_sim
+"mult_reg_df"
