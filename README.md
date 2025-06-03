@@ -19,7 +19,7 @@ pak::pak("jhuwit/bloodlines")
 #> ℹ Loading metadata database✔ Loading metadata database ... done
 #>  
 #> ℹ No downloads are needed
-#> ✔ 1 pkg + 36 deps: kept 24 [8.8s]
+#> ✔ 1 pkg + 40 deps: kept 27 [9.7s]
 ```
 
 ## Lasagna plots
