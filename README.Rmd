@@ -141,6 +141,9 @@ plot_heatmap(data = reg_df,
 
 
 ```{r j_plot}
+data(mult_reg_df)
+
+plot_j(mult_reg_df, col_vec = c("A"= "#1E8E99", "B" = "#FF8E32"))
 
 
 

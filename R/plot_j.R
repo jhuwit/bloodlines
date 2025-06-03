@@ -25,8 +25,6 @@
 #' # Run the function
 #' plot_j(mult_reg_df, col_vec = c("A"= "#1E8E99", "B" = "#FF8E32"))
 #'
-
-
 plot_j = function(data,
                   facet_var = NULL,
                   col_vec = NULL,
