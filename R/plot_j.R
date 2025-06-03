@@ -1,10 +1,6 @@
 #' Create a 'j-plot' from regression results from multiple models
 #'
-#' @importFrom dplyr rename if_else across mutate between
-#' @importFrom tidyr drop_na
 #' @importFrom ggplot2 ggplot aes geom_point geom_errorbar theme_bw labs scale_shape_discrete scale_color_discrete scale_color_manual scale_shape_manual theme geom_hline guides element_text position_dodge margin guide_legend
-#' @importFrom paletteer scale_fill_paletteer_c
-#' @importFrom colorspace diverge_hcl
 #'
 #' @param data A data frame containing regression results, must include columns 'variable', 'estimate', 'ub', 'lb', 'model'
 #' @param facet_var A variable to facet the plot by (optional)
@@ -98,7 +94,7 @@ plot_j = function(data,
       y = paste(y_label),
       title = paste(title)
     ) +
-    ggplot2::geom_hline(aes(yintercept = 1), col = "black") +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = 1), col = "black") +
     ggplot2::theme(
       legend.position = legend_pos,
       axis.text.x = ggplot2::element_text(size = 12),

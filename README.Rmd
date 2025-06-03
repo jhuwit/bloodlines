@@ -73,7 +73,7 @@ plot_lasagna(data = sample_df_clean,
 
 ## Lasagna plots (time series version)
 
-```{r time series lasagna}
+```{r time_series_lasagna}
 sample_df_clean2 = 
   sample_df_clean %>% 
   dplyr::group_by(id) %>% 
@@ -103,9 +103,6 @@ plot_ts_lasagna(data = sample_df_clean2,
 data(reg_df)
 
 plot_heatmap(data = reg_df,
-             xvar = "x",
-             yvar = "y",
-             estvar = "estimate",
              fill_lab = "Odds Ratio",
              xlab = "Hemodynamic Range",
              ylab = "Hemodynamic Range",
@@ -138,3 +135,14 @@ plot_heatmap(data = reg_df,
              n_colors = 5)
 
 ```
+
+
+## J plot from regression results 
+
+
+```{r j_plot}
+
+
+
+```
+
