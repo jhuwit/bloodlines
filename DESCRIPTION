@@ -3,10 +3,7 @@ Title: Visualize hemodynamic time series data
 Version: 0.0.0.9000
 Authors@R: 
     person("Lily", "Koffman", , "lkoffma2@jh.edu", role = c("aut", "cre"))
-Description: The goal of bloodlines is to generate nice plots for hemodynamics data. Users can generate lasagna plots, both sorted and unsorted, to visualize hemdoynamic 
-values across the population. Users can also run regressions with specified outcomes of interest and plot heatmaps or forest plots
-to visualize the assocations between ranges of hemodynamic parameters and outputs. 
-
+Description: The goal of bloodlines is to generate nice plots for hemodynamics data. Users can generate lasagna plots, both sorted and unsorted, to visualize hemdoynamic values across the population. Users can also run regressions with specified outcomes of interest and plot heatmaps or forest plots to visualize the assocations between ranges of hemodynamic parameters and outputs. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
